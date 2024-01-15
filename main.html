@@ -1,16 +1,62 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorted Articles</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
 
+    h1 {
+      text-align: center;
+    }
+
+    #band {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #band li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+
+  <h1>Sorted Articles</h1>
+
+  <ul id="band"></ul>
+
+  <script>
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+    // Function to remove specified words from the beginning of each band name
+    function removeArticles(bandName) {
+      const articles = ['a', 'an', 'the'];
+      const words = bandName.split(' ');
+
+      // Remove articles from the beginning of the band name
+      while (articles.includes(words[0].toLowerCase())) {
+        words.shift();
+      }
+
+      return words.join(' ');
+    }
+
+    // Sort the bands ignoring specified words
+    const sortedBands = bands.sort((a, b) => removeArticles(a) > removeArticles(b) ? 1 : -1);
+
+    // Display the sorted bands on the webpage
+    const bandList = document.getElementById('band');
+    sortedBands.forEach(band => {
+      const listItem = document.createElement('li');
+      listItem.textContent = band;
+      bandList.appendChild(listItem);
+    });
+  </script>
 
 </body>
-
 </html>
